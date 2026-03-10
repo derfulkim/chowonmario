@@ -73,4 +73,3 @@ void MenuScene::createMenuEntities() {
    backgroundEntity->addComponent<TextureComponent>(backgroundTexture, false, false);
    backgroundEntity->addComponent<BackgroundComponent>();
 }
-왜 false를 넣
