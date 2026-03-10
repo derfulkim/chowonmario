@@ -41,7 +41,7 @@ void ScoreSystem::onAddedToWorld(World* world) {
 
       marioText->addComponent<PositionComponent>(Vector2f(paddingW, paddingH), Vector2i());
 
-      marioText->addComponent<TextComponent>("MARIO", 16);
+      marioText->addComponent<TextComponent>("CHOWON MARIO", 16);
    }
    /* ************************************************************** */
    {
