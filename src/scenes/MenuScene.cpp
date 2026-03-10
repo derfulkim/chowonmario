@@ -64,14 +64,13 @@ int MenuScene::getSelectedSublevel() {
 
 void MenuScene::createMenuEntities() {
    std::shared_ptr<SDL_Texture> backgroundTexture =
-       TextureManager::Get().LoadSharedTexture("res/sprites/blocks/background.png");
+       TextureManager::Get().LoadSharedTexture("res/sprites/blocks/background.png", false);
 
-   Entity* entity(world->create());
+   Entity* backgroundEntity(world->create());
 
-   entity->addComponent<PositionComponent>(
-       Vector2f(0, 0),
-       Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT));
-
-   entity->addComponent<TextureComponent>(backgroundTexture, false, false);
-   entity->addComponent<BackgroundComponent>();
+   backgroundEntity->addComponent<PositionComponent>(
+       Vector2f(0, 0), Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT));
+   backgroundEntity->addComponent<TextureComponent>(backgroundTexture, false, false);
+   backgroundEntity->addComponent<BackgroundComponent>();
 }
+왜 false를 넣
