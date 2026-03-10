@@ -63,33 +63,15 @@ int MenuScene::getSelectedSublevel() {
 }
 
 void MenuScene::createMenuEntities() {
-   std::shared_ptr<SDL_Texture> blockTexture =
-       TextureManager::Get().LoadSharedTexture("res/sprites/blocks/BlockTileSheet.png");
+   std::shared_ptr<SDL_Texture> backgroundTexture =
+       TextureManager::Get().LoadSharedTexture("res/sprites/blocks/background.png");
 
-   backgroundMap.loadMap("res/data/MenuBackground/MenuBackground_Background.csv");
+   Entity* entity(world->create());
 
-   for (unsigned int i = 0; i < backgroundMap.getLevelData().size(); i++) {
-      for (unsigned int j = 0; j < backgroundMap.getLevelData()[i].size(); j++) {
-         int entityID = backgroundMap.getLevelData()[i][j];
-         switch (entityID) {
-            case -1:
-               break;
-            default:
-               Entity* entity(world->create());
+   entity->addComponent<PositionComponent>(
+       Vector2f(0, 0),
+       Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT));
 
-               entity->addComponent<PositionComponent>(
-                   Vector2f(j * SCALED_CUBE_SIZE, i * SCALED_CUBE_SIZE),
-                   Vector2i(SCALED_CUBE_SIZE, SCALED_CUBE_SIZE));
-
-               entity->addComponent<TextureComponent>(blockTexture, false, false);
-
-               entity->addComponent<SpritesheetComponent>(
-                   ORIGINAL_CUBE_SIZE, ORIGINAL_CUBE_SIZE, 1, 1, 1, ORIGINAL_CUBE_SIZE,
-                   ORIGINAL_CUBE_SIZE, Map::BlockIDCoordinates.at(entityID));
-
-               entity->addComponent<BackgroundComponent>();
-               break;
-         }
-      }
-   }
+   entity->addComponent<TextureComponent>(backgroundTexture, false, false);
+   entity->addComponent<BackgroundComponent>();
 }
